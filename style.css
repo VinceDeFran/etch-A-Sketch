@@ -59,29 +59,21 @@
   width: 960px;
 }
 
-.row {
-  border: 2px solid black;
+.gridRow {
+  /* border: 2px solid black; */
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  height: 320px;
-  width: 960px;
+  /* height: 320px; */
+  /* width: 960px; */
 }
 
 .gridBox {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   display: flex;
   flex-wrap: nowrap;
-  height: 320px;
-  width: 320px;
-}
-
-.item1 {
-  border: 1px solid blue;
-  box-shadow: 2px 4px 16px rgba(0,0,0,.06);
-  border-radius: 18px;
-  padding: 16px;
-  width: 300px;
+  /* height: 320px; */
+  /* width: 320px; */
 }
 
 .rightside {
