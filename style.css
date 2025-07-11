@@ -15,9 +15,10 @@
 
 .header {
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 0 16px;
-  font-size: 32px;
+  font-size: 78px;
   font-weight: 900;
   height: 72px;
   background: darkmagenta;
@@ -44,25 +45,36 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  flex: 1;
+  /* flex: 1; */
   justify-content: center;
   align-items: center;
   font-size: x-large;
 }
 
+.instructions {
+  width: 968px;
+  font-size: x-large;
+  color: blue;
+}
+
 .buttonContainer {
   padding: 18px;
   display: flex;
+  gap: 10px;
+  width: 968px;
   flex-direction: row;
   flex-wrap: nowrap;
-  flex: 1;
+  /* flex: 1; */
   justify-content:left;
   align-items: center;
+  font-size: x-large;
 }
 
 #pixelSizeBtn {
-  padding: 10px 20px;
+  padding: 1px;
   font-size: 16px;
+  width: 100px;
+  height: 38px;
   background-color: #4CAF50;
   color: white;
   border: none;
@@ -70,10 +82,175 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-
 #pixelSizeBtn:hover {
-  background-color: #45a049;
+  background-color: #7be481;
 }
+
+#resetBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 95px;
+  height: 38px;
+  background-color: #fa2a2a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#resetBtn:hover {
+  background-color: #fd5f5f;
+}
+
+#rainbowBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 95px;
+  height: 38px;
+  background-color: #ff00ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#rainbowBtn:hover {
+  background-color: #f390f3;
+}
+
+#shadeBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 95px;
+  height: 38px;
+  background-color:gray;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#shadeBtn:hover {
+  background-color: lightgray;
+}
+
+#yellowBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 84px;
+  height: 38px;
+  background-color: yellow;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#yellowBtn:hover {
+  background-color: #f2f27b;
+}
+
+#orangeBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 84px;
+  height: 38px;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#orangeBtn:hover {
+  background-color: gold;
+}
+
+#redBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 84px;
+  height: 38px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#redBtn:hover {
+  background-color: deeppink;
+}
+
+#blueBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 84px;
+  height: 38px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#blueBtn:hover {
+  background-color: lightblue;
+}
+
+#greenBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 84px;
+  height: 38px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#greenBtn:hover {
+  background-color: lightgreen;
+}
+
+#blackBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 84px;
+  height: 38px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#blackBtn:hover {
+  background-color: darkslategray;
+}
+
+#whiteBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 84px;
+  height: 38px;
+  background-color: white;
+  color: white;
+  border: 2px solid dimgray;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#whiteBtn:hover {
+  background-color: lightgray;
+  border: 2px solid lightgray;
+}
+
+
+
+
+
 
 
 .gridContainer {

@@ -1,8 +1,9 @@
 
 
 let N = 96;
+let pixelColor = 'blue';
 
-document.getElementById('pixelSizeBtn').addEventListener('click', function() {
+function setPixels () {
   while (true) {
     let input = prompt("Enter a pixel size (number) between 3 and 96:");
     if (input === null) break; // User cancelled
@@ -19,9 +20,50 @@ document.getElementById('pixelSizeBtn').addEventListener('click', function() {
   });
   if (N == undefined) {
     N=3;
-   }
+  }
+}
+
+document.getElementById('resetBtn').addEventListener('click', function() {
   startDrawing();
 });
+
+document.getElementById('pixelSizeBtn').addEventListener('click', function() {
+  setPixels();
+  startDrawing();
+});
+
+document.getElementById('yellowBtn').addEventListener('click', function() {
+  pixelColor='yellow';
+});
+
+document.getElementById('orangeBtn').addEventListener('click', function() {
+  pixelColor='orange';
+});
+
+document.getElementById('redBtn').addEventListener('click', function() {
+  pixelColor='red';
+});
+document.getElementById('blueBtn').addEventListener('click', function() {
+  pixelColor='blue';
+});
+document.getElementById('greenBtn').addEventListener('click', function() {
+  pixelColor='green';
+});
+document.getElementById('blackBtn').addEventListener('click', function() {
+  pixelColor='black';
+});
+document.getElementById('whiteBtn').addEventListener('click', function() {
+  pixelColor='white';
+});
+
+
+
+
+
+
+
+
+
 
 function startDrawing () {
   // Find the gridContainer element
@@ -71,7 +113,7 @@ function startDrawing () {
           // Left mouse button is event.button === 0
           if (event.button === 0) {
             leftButtonDown = true;
-            gridBox.style.backgroundColor = 'blue';
+            gridBox.style.backgroundColor = pixelColor;
             // Optional: prevent text selection or dragging
             event.preventDefault();
           }
@@ -86,7 +128,7 @@ function startDrawing () {
         gridBox.addEventListener('mouseenter', (event) => {
           // event.buttons bitmask: 1 means left button pressed
           if (leftButtonDown || (event.buttons & 1) === 1) {
-            gridBox.style.backgroundColor = 'blue';
+            gridBox.style.backgroundColor = pixelColor;
           }
         });
 
