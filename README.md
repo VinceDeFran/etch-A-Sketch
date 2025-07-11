@@ -19,3 +19,126 @@ Add a button on the top of the screen that will send the user a popup asking for
 Transform the behavior of a square when interacting with the mouse by introducing a series of modifications:
     First by, randomizing RGB values with each interaction.
     Then by, implementing a progressive darkening effect where each interaction darkens the square by 10%. The goal is to achieve a fully black (or completely colored) square in only ten interactions. (Use the CSS opacity property).
+
+
+
+    TEMP for BUTTON and autGen
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dynamic Grid</title>
+<style>
+  /* Basic styles for visualization */
+  .gridContainer {
+    width: 600px;   /* fixed width */
+    height: 600px;  /* fixed height */
+    border: 1px solid #333;
+    margin-top: 10px;
+  }
+  .gridRow {
+    display: flex;
+  }
+  .gridBox {
+    box-sizing: border-box;
+    border: 1px solid #999;
+  }
+</style>
+</head>
+<body>
+
+<button id="setGridSizeBtn">Set Grid Size</button>
+<div class="gridContainer"></div>
+
+<script>
+  const gridContainer = document.querySelector('.gridContainer');
+  const btn = document.getElementById('setGridSizeBtn');
+
+  // Function to generate the grid
+  function generateGrid(N) {
+    if (!gridContainer) return;
+
+    // Get container size
+    const containerStyles = getComputedStyle(gridContainer);
+    const containerWidth = parseFloat(containerStyles.width);
+    const containerHeight = parseFloat(containerStyles.height);
+
+    // Clear existing grid
+    gridContainer.innerHTML = '';
+
+    // Calculate sizes
+    const gridRowHeight = containerHeight / N;
+    const gridRowWidth = containerWidth;
+    const gridBoxHeight = containerHeight / N;
+    const gridBoxWidth = containerWidth / N;
+
+    for (let i = 0; i < N; i++) {
+      const gridRow = document.createElement('div');
+      gridRow.className = 'gridRow';
+
+      gridRow.style.height = `${gridRowHeight}px`;
+      gridRow.style.width = `${gridRowWidth}px`;
+      gridRow.style.display = 'flex';
+
+      for (let j = 0; j < N; j++) {
+        const gridBox = document.createElement('div');
+        gridBox.className = 'gridBox';
+
+        gridBox.style.height = `${gridBoxHeight}px`;
+        gridBox.style.width = `${gridBoxWidth}px`;
+
+        // Track left mouse button pressed state per gridBox
+        let leftButtonDown = false;
+
+        gridBox.addEventListener('mousedown', (event) => {
+          if (event.button === 0) {
+            leftButtonDown = true;
+            gridBox.style.backgroundColor = 'blue';
+            event.preventDefault();
+          }
+        });
+
+        gridBox.addEventListener('mouseup', (event) => {
+          if (event.button === 0) {
+            leftButtonDown = false;
+          }
+        });
+
+        gridBox.addEventListener('mouseenter', (event) => {
+          if (leftButtonDown || (event.buttons & 1) === 1) {
+            gridBox.style.backgroundColor = 'blue';
+          }
+        });
+
+        gridRow.appendChild(gridBox);
+      }
+
+      gridContainer.appendChild(gridRow);
+    }
+  }
+
+  // Initial grid generation with default N=3
+  generateGrid(3);
+
+  // Button click handler to prompt for N and regenerate grid
+  btn.addEventListener('click', () => {
+    let input = prompt('Enter the number of gridRows and gridBoxes per row (max 96):', '3');
+    if (input === null) return; // user cancelled
+    let N = parseInt(input, 10);
+
+    if (isNaN(N) || N < 1) {
+      alert('Please enter a valid positive number.');
+      return;
+    }
+    if (N > 96) {
+      alert('Maximum allowed value is 96.');
+      return;
+    }
+
+    generateGrid(N);
+  });
+</script>
+
+</body>
+</html>
