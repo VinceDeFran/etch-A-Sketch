@@ -19,7 +19,7 @@ Add a button on the top of the screen that will send the user a popup asking for
 Transform the behavior of a square when interacting with the mouse by introducing a series of modifications:
     First by, randomizing RGB values with each interaction.
     Then by, implementing a progressive darkening effect where each interaction darkens the square by 10%. The goal is to achieve a fully black (or completely colored) square in only ten interactions. (Use the CSS opacity property).
-MODIFIED -- Adding more buttons to implement these two functions as user selected modes. Also adding a pallet of color buttons, of which white can be used to selectively erase. The color buttons would also be useful for backing out of the Oppacity (shading) function.  The Pixel Size button code can be reused as a RESET button.
+MODIFIED -- Adding more buttons to implement the two functions above, as user selected modes. Also adding a pallet of color buttons, of which white can be used to selectively erase. The color buttons would also be useful for backing out of the Oppacity (shading) function.  The Pixel Size button code can be reused as a RESET button.
     1. Make functions separate RESET from pixel size update, then make to separate event listener buttons. Better format the Button Container and text.
     2. Add buttons to use Yellow, Orange, Red, Blue, Green, Black, and White.
     3. Add a Rainbow (random) button.

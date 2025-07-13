@@ -263,20 +263,14 @@
 }
 
 .gridRow {
-  /* border: 2px solid black; */
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  /* height: 320px; */
-  /* width: 960px; */
 }
 
 .gridBox {
-  /* border: 2px solid black; */
   display: flex;
   flex-wrap: nowrap;
-  /* height: 320px; */
-  /* width: 320px; */
 }
 
 .rightside {

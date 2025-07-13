@@ -1,11 +1,11 @@
 
 
-let N = 96;
-let pixelColor = '#0000FF';
+let N = 10;
 let rainbowOn = 0;
 let shadeOn = 0;
-let pixelRgba = 'rgba(0, 0, 255, 1)';
-
+let r = 0;
+let g = 0;
+let b = 255;
 
 function setPixels () {
   while (true) {
@@ -27,34 +27,9 @@ function setPixels () {
   }
 }
 
-function getRandomHexColor() {
-  const hex = Math.floor(Math.random() * 0x1000000).toString(16);
-  return hex.padStart(6, '0');
+function getRandomNumber() {
+  return Math.floor(Math.random() * 256);
 }
-
-function hexToRgba(hex) {
-  // Remove the '#' if present
-  let cleanHex = hex.startsWith('#') ? hex.slice(1) : hex;
-
-  // Handle 3-digit shorthand hex codes (e.g., "F00" becomes "FF0000")
-  if (cleanHex.length === 3) {
-    cleanHex = cleanHex.split('').map(char => char + char).join('');
-  }
-
-  // Validate the hex string length
-  if (cleanHex.length !== 6) {
-    throw new Error("Invalid hex color string. Must be 3 or 6 digits (excluding '#').");
-  }
-
-  // Parse the R, G, and B components
-  const r = parseInt(cleanHex.substring(0, 2), 16);
-  const g = parseInt(cleanHex.substring(2, 4), 16);
-  const b = parseInt(cleanHex.substring(4, 6), 16);
-
-
-  pixelRgba = `rgba(${r}, ${g}, ${b}, 0.2)`;
-}
-
 
 
 //BUTTONS/////////////////////////////////
@@ -62,6 +37,9 @@ function hexToRgba(hex) {
 document.getElementById('resetBtn').addEventListener('click', function() {
   rainbowOn = 0;
   shadeOn = 0;
+  r = 0;
+  g = 0;
+  b = 255;
   startDrawing();
 });
 
@@ -84,49 +62,55 @@ document.getElementById('shadeBtn').addEventListener('click', function() {
 document.getElementById('yellowBtn').addEventListener('click', function() {
   rainbowOn = 0;
   shadeOn = 0;
-  pixelColor = '#FFFF00';
+  r = 255;
+  g = 255;
+  b = 0;
 });
 
 document.getElementById('orangeBtn').addEventListener('click', function() {
   rainbowOn = 0;
   shadeOn = 0;
-  pixelColor='#FFA500';
+  r = 255;
+  g = 165;
+  b = 0;
 });
 
 document.getElementById('redBtn').addEventListener('click', function() {
   rainbowOn = 0;
   shadeOn = 0;
-  pixelColor = '#FF0000';
+ r = 255;
+ g = 0;
+ b = 0;
 });
 document.getElementById('blueBtn').addEventListener('click', function() {
   rainbowOn = 0;
   shadeOn = 0;
-  pixelColor = '#0000FF';
+  r = 0;
+  g = 0;
+  b = 255;
 });
 document.getElementById('greenBtn').addEventListener('click', function() {
   rainbowOn = 0;
   shadeOn = 0;
-  pixelColor = '#00FF00';
+  r = 0;
+  g = 255;
+  b = 0;
 });
 document.getElementById('blackBtn').addEventListener('click', function() {
   rainbowOn = 0;
   shadeOn = 0;
-  pixelColor= '#000000';
+  r = 0;
+  g = 0;
+  b = 0;
 });
 document.getElementById('whiteBtn').addEventListener('click', function() {
   rainbowOn = 0;
   shadeOn = 0;
-  pixelColor= '#FFFFFF';
+  r = 255;
+  g = 255;
+  b = 255;
 });
 //END BUTTONS////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
 
 function startDrawing () {
   // Find the gridContainer element
@@ -168,6 +152,8 @@ function startDrawing () {
         gridBox.style.height = `${gridBoxHeight}px`;
         gridBox.style.width = `${gridBoxWidth}px`;
         gridBox.style.boxSizing = 'border-box'; // good practice for sizing
+        gridBox.style.backgroundColor = 'rgb(255, 255, 255)';
+        gridBox.style.opacity = 0.0;
 
         // Track left mouse button pressed state per gridBox
         let leftButtonDown = false;
@@ -176,23 +162,33 @@ function startDrawing () {
           // Left mouse button is event.button === 0
           if ((event.button === 0) && !rainbowOn && !shadeOn) {
             leftButtonDown = true;
-            gridBox.style.backgroundColor = pixelColor;
+            gridBox.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            gridBox.style.opacity = 1;
             // Optional: prevent text selection or dragging
             event.preventDefault();
           }
           if ((event.button === 0) && rainbowOn) {
             leftButtonDown = true;
-            pixelColor = `#${getRandomHexColor()}`;
-            gridBox.style.backgroundColor = pixelColor;
+            r = getRandomNumber();
+            g = getRandomNumber();
+            b = getRandomNumber();
+            gridBox.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            gridBox.style.opacity = 1;
             // Optional: prevent text selection or dragging
             event.preventDefault();
           }
           if ((event.button === 0) && shadeOn) {
             leftButtonDown = true;
-            hexToRgba(pixelColor);
-            gridBox.style.backgroundColor = pixelRgba;
-            // Optional: prevent text selection or dragging
-            event.preventDefault();
+            const el = event.currentTarget;
+            let currentOpacity = parseFloat(el.style.opacity);
+            if (isNaN(currentOpacity)) {
+              currentOpacity = 0;
+            }
+            if (el.style.opacity <= 1) {
+            let newOpacity = currentOpacity + 0.1;
+            el.style.opacity = newOpacity;
+            }
+            el.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
           }
         });
 
@@ -205,15 +201,28 @@ function startDrawing () {
         gridBox.addEventListener('mouseenter', (event) => {
           // event.buttons bitmask: 1 means left button pressed
           if ((leftButtonDown || (event.buttons & 1) === 1) && !rainbowOn && !shadeOn){
-            gridBox.style.backgroundColor = pixelColor;
+            gridBox.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            gridBox.style.opacity = 1;
           }
           if ((leftButtonDown || (event.buttons & 1) === 1) && rainbowOn){
-            pixelColor = `#${getRandomHexColor()}`;
-            gridBox.style.backgroundColor = pixelColor;
+            r = getRandomNumber();
+            g = getRandomNumber();
+            b = getRandomNumber();
+            gridBox.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            gridBox.style.opacity = 1;
           }
           if ((leftButtonDown || (event.buttons & 1) === 1) && shadeOn){
-            hexToRgba(pixelColor);
-            gridBox.style.backgroundColor = pixelRgba;
+            leftButtonDown = true;
+            const el = event.currentTarget;
+            let currentOpacity = parseFloat(el.style.opacity);
+            if (isNaN(currentOpacity)) {
+              currentOpacity = 0;
+            }
+            if (el.style.opacity <= 1) {
+            let newOpacity = currentOpacity + 0.1;
+            el.style.opacity = newOpacity;
+            }
+            el.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
           }
         });
 
